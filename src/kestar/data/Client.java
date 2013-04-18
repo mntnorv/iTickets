@@ -1,25 +1,31 @@
 package kestar.data;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Client {
 	private String firstName;
 	private String lastName;
-	private char sex;
+	private String sex;
 	private String socialGroup;
+	private Calendar birthday;
 	
 	public Client() {
 		firstName = "";
 		lastName = "";
-		sex = ' ';
+		sex = "";
 		socialGroup = "";
+		birthday = new GregorianCalendar();
 	}
 
-	public Client(String firstName, String lastName, char sex,
-			String socialGroup) {
+	public Client(String firstName, String lastName, String sex,
+			String socialGroup, Calendar birthday) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.sex = sex;
 		this.socialGroup = socialGroup;
+		this.birthday = birthday;
 	}
 
 	public String getFirstName() {
@@ -38,11 +44,11 @@ public class Client {
 		this.lastName = lastName;
 	}
 
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -52,5 +58,13 @@ public class Client {
 
 	public void setSocialGroup(String socialGroup) {
 		this.socialGroup = socialGroup;
+	}
+
+	public Calendar getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Calendar birthday) {
+		this.birthday = birthday;
 	}
 }

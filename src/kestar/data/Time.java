@@ -17,6 +17,24 @@ public class Time {
 		this.minutes = minutes;
 		this.seconds = seconds;
 	}
+	
+	public Time(String timeStr) {
+		if (timeStr.length() >= 4 && timeStr.length() <= 8) {
+			String[] parts = timeStr.split(":");
+			if (parts.length < 2 || parts.length > 3) {
+				throw new IllegalArgumentException(timeStr);
+			}
+			
+			hours = Integer.parseInt(parts[0]);
+			minutes = Integer.parseInt(parts[1]);
+			
+			if (parts.length == 3) {
+				seconds = Integer.parseInt(parts[2]);
+			}
+		} else {
+			throw new IllegalArgumentException(timeStr);
+		}
+	}
 
 	public int getHours() {
 		return hours;
