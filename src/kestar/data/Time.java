@@ -1,5 +1,7 @@
 package kestar.data;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public class Time {
 	private int hours;
 	private int minutes;
@@ -58,5 +60,11 @@ public class Time {
 
 	public void setSeconds(int seconds) {
 		this.seconds = seconds;
+	}
+	
+	@Override
+	@JsonValue
+	public String toString() {
+		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 }

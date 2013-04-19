@@ -16,5 +16,7 @@ public class Main {
 		List<SocialGroup> socialGroups = dataHelper.getSocialGroups();
 		List<Client> clients = dataHelper.getClients();
 		List<Vehicle> vehicles = dataHelper.getVehicles();
+		
+		dataHelper.writeData();
 	}
 }

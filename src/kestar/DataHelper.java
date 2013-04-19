@@ -74,7 +74,6 @@ public class DataHelper {
 			JsonParser parser = factory.createJsonParser(new File(dataFileName));
 			
 			parser.nextToken();
-			
 			while (parser.nextToken() != JsonToken.END_OBJECT) {
 				String fieldName = parser.getCurrentName();
 				parser.nextToken();
@@ -88,6 +87,7 @@ public class DataHelper {
 					vehicles = readArray(parser, mapper, Vehicle.class);
 				}
 			}
+			parser.close();
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
@@ -108,5 +108,33 @@ public class DataHelper {
 			list.add(item);
 		}
 		return list;
+	}
+	
+	//================================================================================
+	// Write methods
+	//================================================================================
+	public void writeData() {
+		try {
+			JsonGenerator generator = factory.createJsonGenerator(new File(dataFileName), JsonEncoding.UTF8);
+			generator.writeStartObject();
+			
+			generator.writeFieldName(CLASS_MAP.get(AgeGroup.class));
+			mapper.writeValue(generator, ageGroups);
+			
+			generator.writeFieldName(CLASS_MAP.get(SocialGroup.class));
+			mapper.writeValue(generator, socialGroups);
+			
+			generator.writeFieldName(CLASS_MAP.get(Client.class));
+			mapper.writeValue(generator, clients);
+			
+			generator.writeFieldName(CLASS_MAP.get(Vehicle.class));
+			mapper.writeValue(generator, vehicles);
+			
+			generator.writeEndObject();
+			generator.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
