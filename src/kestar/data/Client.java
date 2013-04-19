@@ -3,6 +3,8 @@ package kestar.data;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Client {
 	private String firstName;
 	private String lastName;
@@ -66,5 +68,18 @@ public class Client {
 
 	public void setBirthday(Calendar birthday) {
 		this.birthday = birthday;
+	}
+	
+	@JsonIgnore
+	public int getAge() {
+		Calendar now = GregorianCalendar.getInstance();
+		int age = now.get(Calendar.YEAR) - birthday.get(Calendar.YEAR);
+		
+		now.set(Calendar.YEAR, birthday.get(Calendar.YEAR));
+		if (now.compareTo(birthday) < 0) {
+			age--;
+		}
+		
+		return age;
 	}
 }

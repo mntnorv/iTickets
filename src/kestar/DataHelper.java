@@ -11,6 +11,7 @@ import kestar.data.AgeGroup;
 import kestar.data.Client;
 import kestar.data.SocialGroup;
 import kestar.data.Vehicle;
+import kestar.data.VehicleType;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -31,6 +32,7 @@ public class DataHelper {
 	private List<SocialGroup> socialGroups;
 	private List<Client> clients;
 	private List<Vehicle> vehicles;
+	private List<VehicleType> vehicleTypes;
 	private String dataFileName;
 	
 	public DataHelper(String dataFileName) {
@@ -45,6 +47,7 @@ public class DataHelper {
 		CLASS_MAP.put(SocialGroup.class, "socGroups");
 		CLASS_MAP.put(Client.class, "clients");
 		CLASS_MAP.put(Vehicle.class, "vehicles");
+		CLASS_MAP.put(VehicleType.class, "vehicleTypes");
 	}
 	
 	//================================================================================
@@ -66,6 +69,10 @@ public class DataHelper {
 		return vehicles;
 	}
 	
+	public List<VehicleType> getVehicleTypes() {
+		return vehicleTypes;
+	}
+
 	//================================================================================
 	// Read methods
 	//================================================================================
@@ -85,6 +92,8 @@ public class DataHelper {
 					clients = readArray(parser, mapper, Client.class);
 				} else if (CLASS_MAP.get(Vehicle.class).equals(fieldName)) {
 					vehicles = readArray(parser, mapper, Vehicle.class);
+				} else if (CLASS_MAP.get(VehicleType.class).equals(fieldName)) {
+					vehicleTypes = readArray(parser, mapper, VehicleType.class);
 				}
 			}
 			parser.close();
@@ -123,6 +132,9 @@ public class DataHelper {
 			
 			generator.writeFieldName(CLASS_MAP.get(SocialGroup.class));
 			mapper.writeValue(generator, socialGroups);
+			
+			generator.writeFieldName(CLASS_MAP.get(VehicleType.class));
+			mapper.writeValue(generator, vehicleTypes);
 			
 			generator.writeFieldName(CLASS_MAP.get(Client.class));
 			mapper.writeValue(generator, clients);

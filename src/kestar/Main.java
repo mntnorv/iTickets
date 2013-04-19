@@ -6,14 +6,16 @@ import kestar.data.AgeGroup;
 import kestar.data.Client;
 import kestar.data.SocialGroup;
 import kestar.data.Vehicle;
+import kestar.data.VehicleType;
 
 public class Main {
 	public static void main(String [ ] args) {
-		DataHelper dataHelper = new DataHelper("itickets_data");
+		DataHelper dataHelper = new DataHelper("data/itickets_data");
 		dataHelper.readData();
 		
 		List<AgeGroup> ageGroups = dataHelper.getAgeGroups();
 		List<SocialGroup> socialGroups = dataHelper.getSocialGroups();
+		List<VehicleType> vehicleTypes = dataHelper.getVehicleTypes();
 		List<Client> clients = dataHelper.getClients();
 		List<Vehicle> vehicles = dataHelper.getVehicles();
 		
