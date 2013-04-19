@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Window" id="1" x="40" y="40" width="473" height="273" text="Pirkti bilietą" measuredWidth="473" measuredHeight="273"/>
+  <widgets xsi:type="model:List" id="2" x="50" y="72" width="217" height="144" text="|Testas Testauskas&#xD;&#xA;Testovas Testovivičius&#xD;&#xA;Vardenis Pavardenis" measuredWidth="217" measuredHeight="144">
+    <font/>
+    <items x="0" y="2" width="217" height="21" text="|Testas Testauskas"/>
+    <items x="0" y="23" width="217" height="21" text="Testovas Testovivičius"/>
+    <items x="0" y="44" width="217" height="21" text="Vardenis Pavardenis"/>
+  </widgets>
+  <widgets xsi:type="model:Combo" id="3" x="50" y="221" width="217" text="Autobusas" measuredWidth="217" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:DateField" id="4" x="50" y="248" width="217" text="2013-04-19" measuredWidth="217" measuredHeight="23"/>
+  <widgets xsi:type="model:TextField" id="5" x="50" y="276" width="217" text="13:05" measuredWidth="217" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="6" x="282" y="183" text="Kaina:" measuredWidth="66" measuredHeight="39">
+    <font size="24px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="7" x="409" y="175" text="0,50" measuredWidth="68" measuredHeight="53">
+    <font size="32px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="8" x="474" y="185" text="Lt" measuredWidth="24" measuredHeight="39">
+    <font size="24px"/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="9" x="282" y="252" width="216" height="47" text="Pirkti" measuredWidth="216" measuredHeight="47">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="11" x="282" y="102" text="Pilna kaina:" measuredWidth="91" measuredHeight="31">
+    <font size="16px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="12" x="438" y="101" text="1,00" measuredWidth="40" measuredHeight="33" textAlignment="Right">
+    <font size="18px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="13" x="477" y="103" text="Lt" measuredWidth="19" measuredHeight="31">
+    <font size="16px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="14" x="282" y="132" text="Nuolaida:" measuredWidth="78" measuredHeight="31">
+    <font size="16px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="15" x="438" y="131" text="0,50" measuredWidth="40" measuredHeight="33" textAlignment="Right">
+    <font size="18px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="16" x="477" y="133" text="Lt" measuredWidth="19" measuredHeight="31">
+    <font size="16px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="21" x="282" y="72" text="Sąskaitos likutis:" measuredWidth="126" measuredHeight="31">
+    <font size="16px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="22" x="428" y="71" text="10,50" measuredWidth="50" measuredHeight="33" textAlignment="Right">
+    <font size="18px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="23" x="477" y="73" text="Lt" measuredWidth="19" measuredHeight="31">
+    <font size="16px"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
