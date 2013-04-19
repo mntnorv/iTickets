@@ -7,6 +7,7 @@ package kestar.ui;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
@@ -15,6 +16,8 @@ import com.jgoodies.forms.layout.*;
  * @author Kęstutis Taraskevičius
  */
 public class MainWindow extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	public MainWindow() {
 		try {
 			UIManager.setLookAndFeel(
@@ -26,6 +29,16 @@ public class MainWindow extends JFrame {
 		initComponents();
 	}
 
+	private void dataTabbedPaneStateChanged(ChangeEvent e) {
+		if (dataTabbedPane.getSelectedIndex() == 0) {
+			buyButton.setEnabled(true);
+			transferButton.setEnabled(true);
+		} else {
+			buyButton.setEnabled(false);
+			transferButton.setEnabled(false);
+		}
+	}
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		ResourceBundle bundle = ResourceBundle.getBundle("kestar.strings");
@@ -34,6 +47,7 @@ public class MainWindow extends JFrame {
 		removeButton = new JButton();
 		buyButton = new JButton();
 		transferButton = new JButton();
+		toolBarSpacer = new JPanel(null);
 		helpButton = new JButton();
 		dataTabbedPane = new JTabbedPane();
 		clientsPanel1 = new ClientsPanel();
@@ -69,6 +83,7 @@ public class MainWindow extends JFrame {
 			transferButton.setText(bundle.getString("MainWindow.transferButton.text"));
 			transferButton.setIcon(new ImageIcon(getClass().getResource("/kestar/icons/coins_add.png")));
 			mainToolBar.add(transferButton);
+			mainToolBar.add(toolBarSpacer);
 
 			//---- helpButton ----
 			helpButton.setIcon(new ImageIcon(getClass().getResource("/kestar/icons/help.png")));
@@ -78,6 +93,12 @@ public class MainWindow extends JFrame {
 
 		//======== dataTabbedPane ========
 		{
+			dataTabbedPane.addChangeListener(new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					dataTabbedPaneStateChanged(e);
+				}
+			});
 			dataTabbedPane.addTab(bundle.getString("MainWindow.clientsPanel1.tab.title"), clientsPanel1);
 
 			dataTabbedPane.addTab(bundle.getString("MainWindow.vehiclesPanel1.tab.title"), vehiclesPanel1);
@@ -95,6 +116,7 @@ public class MainWindow extends JFrame {
 	private JButton removeButton;
 	private JButton buyButton;
 	private JButton transferButton;
+	private JPanel toolBarSpacer;
 	private JButton helpButton;
 	private JTabbedPane dataTabbedPane;
 	private ClientsPanel clientsPanel1;

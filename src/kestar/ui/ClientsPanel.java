@@ -10,6 +10,8 @@ import javax.swing.*;
  * @author Kestutis Taraskevicius
  */
 public class ClientsPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+	
 	public ClientsPanel() {
 		initComponents();
 	}

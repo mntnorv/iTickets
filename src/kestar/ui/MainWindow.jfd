@@ -37,6 +37,9 @@ new FormModel {
 					"text": new FormMessage( null, "MainWindow.transferButton.text" )
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/coins_add.png" )
 				} )
+				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+					name: "toolBarSpacer"
+				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "helpButton"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/help.png" )
@@ -47,6 +50,7 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "dataTabbedPane"
+				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "dataTabbedPaneStateChanged", true ) )
 				add( new FormComponent( "kestar.ui.ClientsPanel" ) {
 					name: "clientsPanel1"
 				}, new FormLayoutConstraints( null ) {
