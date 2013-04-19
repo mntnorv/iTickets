@@ -3,14 +3,18 @@ package kestar;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kestar.data.AgeGroup;
 import kestar.data.Client;
 import kestar.data.SocialGroup;
 import kestar.data.Vehicle;
 
+import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -18,6 +22,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DataHelper {
+	private static final Map<Class<?>, String> CLASS_MAP = new HashMap<Class<?>, String>();
+	
 	private JsonFactory factory;
 	private ObjectMapper mapper;
 	
@@ -34,36 +40,16 @@ public class DataHelper {
 		mapper = new ObjectMapper();
 	}
 	
-	public void readData() {
-		try {
-			JsonParser parser = factory.createJsonParser(new File(dataFileName));
-			
-			parser.nextToken();
-			
-			while (parser.nextToken() != JsonToken.END_OBJECT) {
-				String fieldName = parser.getCurrentName();
-				parser.nextToken();
-				if ("ageGroups".equals(fieldName)) {
-					ageGroups = readAgeGroups(parser, mapper);
-				} else if ("socGroups".equals(fieldName)) {
-					socialGroups = readSocialGroups(parser, mapper);
-				} else if ("clients".equals(fieldName)) {
-					clients = readClients(parser, mapper);
-				} else if ("vehicles".equals(fieldName)) {
-					vehicles = readVehicles(parser, mapper);
-				}
-			}
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();	
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	static {
+		CLASS_MAP.put(AgeGroup.class, "ageGroups");
+		CLASS_MAP.put(SocialGroup.class, "socGroups");
+		CLASS_MAP.put(Client.class, "clients");
+		CLASS_MAP.put(Vehicle.class, "vehicles");
 	}
 	
+	//================================================================================
+	// Getters
+	//================================================================================
 	public List<AgeGroup> getAgeGroups() {
 		return ageGroups;
 	}
@@ -79,48 +65,48 @@ public class DataHelper {
 	public List<Vehicle> getVehicles() {
 		return vehicles;
 	}
-
-	private List<AgeGroup> readAgeGroups(JsonParser parser, ObjectMapper mapper)
-			throws JsonParseException, JsonMappingException, IOException {
-		
-		List<AgeGroup> groups = new ArrayList<AgeGroup>();
-		while (parser.nextToken() == JsonToken.START_OBJECT) {
-			AgeGroup group = mapper.readValue(parser, AgeGroup.class);
-			groups.add(group);
+	
+	//================================================================================
+	// Read methods
+	//================================================================================
+	public void readData() {
+		try {
+			JsonParser parser = factory.createJsonParser(new File(dataFileName));
+			
+			parser.nextToken();
+			
+			while (parser.nextToken() != JsonToken.END_OBJECT) {
+				String fieldName = parser.getCurrentName();
+				parser.nextToken();
+				if (CLASS_MAP.get(AgeGroup.class).equals(fieldName)) {
+					ageGroups = readArray(parser, mapper, AgeGroup.class);
+				} else if (CLASS_MAP.get(SocialGroup.class).equals(fieldName)) {
+					socialGroups = readArray(parser, mapper, SocialGroup.class);
+				} else if (CLASS_MAP.get(Client.class).equals(fieldName)) {
+					clients = readArray(parser, mapper, Client.class);
+				} else if (CLASS_MAP.get(Vehicle.class).equals(fieldName)) {
+					vehicles = readArray(parser, mapper, Vehicle.class);
+				}
+			}
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return groups;
 	}
 	
-	private List<SocialGroup> readSocialGroups(JsonParser parser, ObjectMapper mapper)
+	private <T> List<T> readArray(JsonParser parser, ObjectMapper mapper, Class<T> type)
 			throws JsonParseException, JsonMappingException, IOException {
 		
-		List<SocialGroup> groups = new ArrayList<SocialGroup>();
+		List<T> list = new ArrayList<T>();
 		while (parser.nextToken() == JsonToken.START_OBJECT) {
-			SocialGroup group = mapper.readValue(parser, SocialGroup.class);
-			groups.add(group);
+			T item = mapper.readValue(parser, type);
+			list.add(item);
 		}
-		return groups;
-	}
-	
-	private List<Client> readClients(JsonParser parser, ObjectMapper mapper)
-			throws JsonParseException, JsonMappingException, IOException {
-		
-		List<Client> clients = new ArrayList<Client>();
-		while (parser.nextToken() == JsonToken.START_OBJECT) {
-			Client client = mapper.readValue(parser, Client.class);
-			clients.add(client);
-		}
-		return clients;
-	}
-	
-	private List<Vehicle> readVehicles(JsonParser parser, ObjectMapper mapper)
-			throws JsonParseException, JsonMappingException, IOException {
-		
-		List<Vehicle> vehicles = new ArrayList<Vehicle>();
-		while (parser.nextToken() == JsonToken.START_OBJECT) {
-			Vehicle vehicle = mapper.readValue(parser, Vehicle.class);
-			vehicles.add(vehicle);
-		}
-		return vehicles;
+		return list;
 	}
 }
