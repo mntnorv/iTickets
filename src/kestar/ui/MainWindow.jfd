@@ -1,0 +1,69 @@
+JFDML JFormDesigner: "5.1.0.0.51" Java: "1.7.0_13" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundlePackage": "kestar"
+	"i18n.bundleName": "strings"
+	"i18n.keyPrefix": "MainWindow"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "default:grow"
+			"$rowSpecs": "default, linegap, fill:default:grow"
+		} ) {
+			name: "this"
+			"title": new FormMessage( null, "MainWindow.this.title" )
+			"$sizePolicy": 0
+			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
+				name: "mainToolBar"
+				"floatable": false
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "addButton"
+					"text": new FormMessage( null, "MainWindow.addButton.text" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/add.png" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "removeButton"
+					"text": new FormMessage( null, "MainWindow.removeButton.text" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/delete.png" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buyButton"
+					"text": new FormMessage( null, "MainWindow.buyButton.text" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/money_dollar.png" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "transferButton"
+					"text": new FormMessage( null, "MainWindow.transferButton.text" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/coins_add.png" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "helpButton"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/help.png" )
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 1
+				"gridY": 1
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "dataTabbedPane"
+				add( new FormComponent( "kestar.ui.ClientsPanel" ) {
+					name: "clientsPanel1"
+				}, new FormLayoutConstraints( null ) {
+					"title": new FormMessage( null, "MainWindow.clientsPanel1.tab.title" )
+				} )
+				add( new FormComponent( "kestar.ui.VehiclesPanel" ) {
+					name: "vehiclesPanel1"
+				}, new FormLayoutConstraints( null ) {
+					"title": new FormMessage( null, "MainWindow.vehiclesPanel1.tab.title" )
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 1
+				"gridY": 3
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 520, 405 )
+		} )
+	}
+}

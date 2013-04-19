@@ -7,6 +7,7 @@ import kestar.data.Client;
 import kestar.data.SocialGroup;
 import kestar.data.Vehicle;
 import kestar.data.VehicleType;
+import kestar.ui.MainWindow;
 
 public class Main {
 	public static void main(String [ ] args) {
@@ -20,5 +21,8 @@ public class Main {
 		List<Vehicle> vehicles = dataHelper.getVehicles();
 		
 		dataHelper.writeData();
+		
+		MainWindow testWindow = new MainWindow();
+		testWindow.setVisible(true);
 	}
 }
