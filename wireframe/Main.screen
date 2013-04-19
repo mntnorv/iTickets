@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model:Screen xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" theme="clean">
+  <widgets xsi:type="model:Window" id="1" x="24" y="24" width="801" height="545" text="iTickets" measuredWidth="801" measuredHeight="545" minimizeButton="true" maximizeButton="true"/>
+  <widgets xsi:type="model:Panel" id="2" x="24" y="43" width="801" height="38" measuredWidth="801" measuredHeight="38"/>
+  <widgets xsi:type="model:Label" id="24" x="35" y="48" text="{add} Pridėti    {trash} Šalinti    {currency-dollar} Pirkti bilietą    {arrow-up} Pildyti sąskaitą" measuredWidth="393" measuredHeight="28">
+    <font size="14px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="25" x="795" y="47" text="{help}" measuredWidth="29" measuredHeight="32">
+    <font size="18px"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" id="26" x="34" y="88" width="781" height="471" text="Klientai,Transporto priemonės" measuredWidth="781" measuredHeight="471" selection="0">
+    <items x="10" y="0" width="59" height="27" text="Klientai"/>
+    <items x="69" y="0" width="137" height="27" text="Transporto priemonės"/>
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" id="4" x="44" y="125" width="761" height="424" text="Vardas,Pavardė ^,=.Lytis,(align:right).Gimimo data,Socialinė grupė,(align:right).Sąskaitos likutis&#xA;Vardenis,Pavardenis,Vyras,1990-01-01,Soc. grupė 1,10\,00 Lt&#xA;Testas,Testauskas,Vyras,1985-12-31,Soc. grupė 2,5\,50 Lt&#xA;Testovas,Testovivičius,Vyras,1982-06-12,Soc. grupė 1,12\,34 Lt" measuredWidth="761" measuredHeight="424" alternative="#eeeeee">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="31" x="856" y="360" measuredWidth="233" measuredHeight="153">
+    <widgets xsi:type="model:Window" id="32" width="233" height="153" text="Pildyti bilietą" measuredWidth="233" measuredHeight="153"/>
+    <widgets xsi:type="model:Label" id="33" x="10" y="29" text="Sąskaitos likutis:" measuredWidth="118" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="34" x="176" y="27" text="0,50" measuredWidth="43" measuredHeight="33">
+      <font size="18px" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="35" x="215" y="29" text="Lt" measuredWidth="18" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="36" x="10" y="59" width="199" text="10,00" measuredWidth="199" measuredHeight="28" textAlignment="Right">
+      <font size="15px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="37" x="215" y="58" text="Lt" measuredWidth="18" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="38" x="10" y="96" width="216" height="47" text="Pildyti" measuredWidth="216" measuredHeight="47">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="39" x="856" y="24" measuredWidth="233" measuredHeight="297">
+    <widgets xsi:type="model:Window" id="40" width="233" height="297" text="Pirkti bilietą" measuredWidth="233" measuredHeight="297"/>
+    <widgets xsi:type="model:Combo" id="41" x="10" y="29" width="217" text="Autobusas" measuredWidth="217" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:DateField" id="42" x="10" y="56" width="217" text="2013-04-19" measuredWidth="217" measuredHeight="23"/>
+    <widgets xsi:type="model:TextField" id="43" x="10" y="84" width="217" text="13:05" measuredWidth="217" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="44" x="10" y="201" text="Kaina:" measuredWidth="68" measuredHeight="40">
+      <font size="24px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="45" x="137" y="193" text="0,50" measuredWidth="68" measuredHeight="53">
+      <font size="32px" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="46" x="202" y="203" text="Lt" measuredWidth="24" measuredHeight="40">
+      <font size="24px"/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="47" x="10" y="242" width="216" height="47" text="Pirkti" measuredWidth="216" measuredHeight="47">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="48" x="10" y="142" text="Pilna kaina:" measuredWidth="83" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="49" x="166" y="141" text="1,00" measuredWidth="43" measuredHeight="33" textAlignment="Right">
+      <font size="18px" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="50" x="205" y="143" text="Lt" measuredWidth="18" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="51" x="10" y="172" text="Nuolaida:" measuredWidth="71" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="52" x="166" y="171" text="0,50" measuredWidth="43" measuredHeight="33" textAlignment="Right">
+      <font size="18px" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="53" x="205" y="173" text="Lt" measuredWidth="18" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="54" x="10" y="112" text="Sąskaitos likutis:" measuredWidth="118" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="55" x="156" y="111" text="10,50" measuredWidth="54" measuredHeight="33" textAlignment="Right">
+      <font size="18px" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="56" x="205" y="113" text="Lt" measuredWidth="18" measuredHeight="29">
+      <font size="16px"/>
+    </widgets>
+  </widgets>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>
