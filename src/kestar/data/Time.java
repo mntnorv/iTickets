@@ -1,8 +1,10 @@
 package kestar.data;
 
+import java.util.Calendar;
+
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public class Time {
+public class Time implements Comparable<Time> {
 	private int hours;
 	private int minutes;
 	private int seconds;
@@ -37,6 +39,12 @@ public class Time {
 			throw new IllegalArgumentException(timeStr);
 		}
 	}
+	
+	public Time(Calendar cal) {
+		hours = cal.get(Calendar.HOUR_OF_DAY);
+		minutes = cal.get(Calendar.MINUTE);
+		seconds = cal.get(Calendar.SECOND);
+	}
 
 	public int getHours() {
 		return hours;
@@ -66,5 +74,18 @@ public class Time {
 	@JsonValue
 	public String toString() {
 		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+	}
+
+	@Override
+	public int compareTo(Time o) {
+		if (hours == o.hours) {
+			if (minutes == o.minutes) {
+				return seconds - o.seconds;
+			} else {
+				return minutes - o.minutes;
+			}
+		} else {
+			return hours - o.hours;
+		}
 	}
 }

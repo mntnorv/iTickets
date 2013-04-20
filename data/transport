@@ -1,0 +1,15 @@
+{
+  "vehicleTypes":[
+    "autobusas",
+    "troleibusas",
+    "mikroautobusas"
+  ],
+  "vehicles":[
+    {
+      "type":1,
+      "route":1,
+      "price":10.0,
+      "discountGroup":"Autobusai 1"
+    }
+  ]
+}

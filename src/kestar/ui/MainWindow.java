@@ -50,8 +50,8 @@ public class MainWindow extends JFrame {
 		toolBarSpacer = new JPanel(null);
 		helpButton = new JButton();
 		dataTabbedPane = new JTabbedPane();
-		clientsPanel1 = new ClientsPanel();
-		vehiclesPanel1 = new VehiclesPanel();
+		clientsPanel = new ClientsPanel();
+		vehiclesPanel = new VehiclesPanel();
 
 		//======== this ========
 		setTitle(bundle.getString("MainWindow.this.title"));
@@ -99,9 +99,9 @@ public class MainWindow extends JFrame {
 					dataTabbedPaneStateChanged(e);
 				}
 			});
-			dataTabbedPane.addTab(bundle.getString("MainWindow.clientsPanel1.tab.title"), clientsPanel1);
+			dataTabbedPane.addTab(bundle.getString("MainWindow.clientsPanel.tab.title"), clientsPanel);
 
-			dataTabbedPane.addTab(bundle.getString("MainWindow.vehiclesPanel1.tab.title"), vehiclesPanel1);
+			dataTabbedPane.addTab(bundle.getString("MainWindow.vehiclesPanel.tab.title"), vehiclesPanel);
 
 		}
 		contentPane.add(dataTabbedPane, CC.xy(1, 3));
@@ -119,7 +119,7 @@ public class MainWindow extends JFrame {
 	private JPanel toolBarSpacer;
 	private JButton helpButton;
 	private JTabbedPane dataTabbedPane;
-	private ClientsPanel clientsPanel1;
-	private VehiclesPanel vehiclesPanel1;
+	private ClientsPanel clientsPanel;
+	private VehiclesPanel vehiclesPanel;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

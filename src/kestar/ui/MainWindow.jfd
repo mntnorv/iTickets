@@ -52,14 +52,14 @@ new FormModel {
 				name: "dataTabbedPane"
 				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "dataTabbedPaneStateChanged", true ) )
 				add( new FormComponent( "kestar.ui.ClientsPanel" ) {
-					name: "clientsPanel1"
+					name: "clientsPanel"
 				}, new FormLayoutConstraints( null ) {
-					"title": new FormMessage( null, "MainWindow.clientsPanel1.tab.title" )
+					"title": new FormMessage( null, "MainWindow.clientsPanel.tab.title" )
 				} )
 				add( new FormComponent( "kestar.ui.VehiclesPanel" ) {
-					name: "vehiclesPanel1"
+					name: "vehiclesPanel"
 				}, new FormLayoutConstraints( null ) {
-					"title": new FormMessage( null, "MainWindow.vehiclesPanel1.tab.title" )
+					"title": new FormMessage( null, "MainWindow.vehiclesPanel.tab.title" )
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1

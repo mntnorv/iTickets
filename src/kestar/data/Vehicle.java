@@ -4,31 +4,21 @@ public class Vehicle {
 	private int type;
 	private int route;
 	private double price;
-	private int fromWeekday;
-	private int toWeekday;
-	private Time fromTime;
-	private Time toTime;
+	private String discountGroup;
 	
 	public Vehicle() {
 		type = 0;
 		route = 0;
 		price = 0;
-		fromWeekday = 0;
-		toWeekday = 0;
-		fromTime = new Time();
-		toTime = new Time();
+		discountGroup = "";
 	}
 
-	public Vehicle(int type, int route, double price, int fromWeekday,
-			int toWeekday, Time fromTime, Time toTime) {
+	public Vehicle(int type, int route, double price, String discountGroup) {
 		super();
 		this.type = type;
 		this.route = route;
 		this.price = price;
-		this.fromWeekday = fromWeekday;
-		this.toWeekday = toWeekday;
-		this.fromTime = fromTime;
-		this.toTime = toTime;
+		this.discountGroup = discountGroup;
 	}
 
 	public int getType() {
@@ -55,35 +45,11 @@ public class Vehicle {
 		this.price = price;
 	}
 
-	public int getFromWeekday() {
-		return fromWeekday;
+	public String getDiscountGroup() {
+		return discountGroup;
 	}
 
-	public void setFromWeekday(int fromWeekday) {
-		this.fromWeekday = fromWeekday;
-	}
-
-	public int getToWeekday() {
-		return toWeekday;
-	}
-
-	public void setToWeekday(int toWeekday) {
-		this.toWeekday = toWeekday;
-	}
-
-	public Time getFromTime() {
-		return fromTime;
-	}
-
-	public void setFromTime(Time fromTime) {
-		this.fromTime = fromTime;
-	}
-
-	public Time getToTime() {
-		return toTime;
-	}
-
-	public void setToTime(Time toTime) {
-		this.toTime = toTime;
+	public void setDiscountGroup(String discountGroup) {
+		this.discountGroup = discountGroup;
 	}
 }

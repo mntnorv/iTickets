@@ -11,7 +11,6 @@ import kestar.data.AgeGroup;
 import kestar.data.Client;
 import kestar.data.SocialGroup;
 import kestar.data.Vehicle;
-import kestar.data.VehicleType;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -23,7 +22,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DataHelper {
-	private static final Map<Class<?>, String> CLASS_MAP = new HashMap<Class<?>, String>();
+	private static final Map<Class<?>, String> ARRAY_CLASS_MAP = new HashMap<Class<?>, String>();
 	
 	private JsonFactory factory;
 	private ObjectMapper mapper;
@@ -32,7 +31,7 @@ public class DataHelper {
 	private List<SocialGroup> socialGroups;
 	private List<Client> clients;
 	private List<Vehicle> vehicles;
-	private List<VehicleType> vehicleTypes;
+	private List<String> vehicleTypes;
 	private String dataFileName;
 	
 	public DataHelper(String dataFileName) {
@@ -43,11 +42,11 @@ public class DataHelper {
 	}
 	
 	static {
-		CLASS_MAP.put(AgeGroup.class, "ageGroups");
-		CLASS_MAP.put(SocialGroup.class, "socGroups");
-		CLASS_MAP.put(Client.class, "clients");
-		CLASS_MAP.put(Vehicle.class, "vehicles");
-		CLASS_MAP.put(VehicleType.class, "vehicleTypes");
+		ARRAY_CLASS_MAP.put(AgeGroup.class, "ageGroups");
+		ARRAY_CLASS_MAP.put(SocialGroup.class, "socGroups");
+		ARRAY_CLASS_MAP.put(Client.class, "clients");
+		ARRAY_CLASS_MAP.put(Vehicle.class, "vehicles");
+		ARRAY_CLASS_MAP.put(String.class, "vehicleTypes");
 	}
 	
 	//================================================================================
@@ -69,7 +68,7 @@ public class DataHelper {
 		return vehicles;
 	}
 	
-	public List<VehicleType> getVehicleTypes() {
+	public List<String> getVehicleTypes() {
 		return vehicleTypes;
 	}
 
@@ -84,16 +83,14 @@ public class DataHelper {
 			while (parser.nextToken() != JsonToken.END_OBJECT) {
 				String fieldName = parser.getCurrentName();
 				parser.nextToken();
-				if (CLASS_MAP.get(AgeGroup.class).equals(fieldName)) {
+				if (ARRAY_CLASS_MAP.get(AgeGroup.class).equals(fieldName)) {
 					ageGroups = readArray(parser, mapper, AgeGroup.class);
-				} else if (CLASS_MAP.get(SocialGroup.class).equals(fieldName)) {
+				} else if (ARRAY_CLASS_MAP.get(SocialGroup.class).equals(fieldName)) {
 					socialGroups = readArray(parser, mapper, SocialGroup.class);
-				} else if (CLASS_MAP.get(Client.class).equals(fieldName)) {
+				} else if (ARRAY_CLASS_MAP.get(Client.class).equals(fieldName)) {
 					clients = readArray(parser, mapper, Client.class);
-				} else if (CLASS_MAP.get(Vehicle.class).equals(fieldName)) {
+				} else if (ARRAY_CLASS_MAP.get(Vehicle.class).equals(fieldName)) {
 					vehicles = readArray(parser, mapper, Vehicle.class);
-				} else if (CLASS_MAP.get(VehicleType.class).equals(fieldName)) {
-					vehicleTypes = readArray(parser, mapper, VehicleType.class);
 				}
 			}
 			parser.close();
@@ -127,19 +124,19 @@ public class DataHelper {
 			JsonGenerator generator = factory.createJsonGenerator(new File(dataFileName), JsonEncoding.UTF8);
 			generator.writeStartObject();
 			
-			generator.writeFieldName(CLASS_MAP.get(AgeGroup.class));
+			generator.writeFieldName(ARRAY_CLASS_MAP.get(AgeGroup.class));
 			mapper.writeValue(generator, ageGroups);
 			
-			generator.writeFieldName(CLASS_MAP.get(SocialGroup.class));
+			generator.writeFieldName(ARRAY_CLASS_MAP.get(SocialGroup.class));
 			mapper.writeValue(generator, socialGroups);
 			
-			generator.writeFieldName(CLASS_MAP.get(VehicleType.class));
-			mapper.writeValue(generator, vehicleTypes);
+			/*generator.writeFieldName(ARRAY_CLASS_MAP.get(VehicleType.class));
+			mapper.writeValue(generator, vehicleTypes);*/
 			
-			generator.writeFieldName(CLASS_MAP.get(Client.class));
+			generator.writeFieldName(ARRAY_CLASS_MAP.get(Client.class));
 			mapper.writeValue(generator, clients);
 			
-			generator.writeFieldName(CLASS_MAP.get(Vehicle.class));
+			generator.writeFieldName(ARRAY_CLASS_MAP.get(Vehicle.class));
 			mapper.writeValue(generator, vehicles);
 			
 			generator.writeEndObject();

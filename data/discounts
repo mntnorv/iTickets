@@ -1,0 +1,35 @@
+{
+  "discounts":{
+    "Autobusai 1":{
+      "age":{
+        "fromAge":0,
+        "toAge":3,
+        "discount":100
+      },
+      "age":{
+        "fromAge":4,
+        "toAge":17,
+        "discount":50
+      },
+      "social":{
+        "group":"Soc. grupė 1",
+        "discount":20
+      },
+      "time":{
+        "startTime":"22:00",
+        "endTime":"23:59",
+        "discount":20
+      },
+      "time":{
+        "startTime":"00:00",
+        "endTime":"05:59",
+        "discount":20
+      },
+      "weekday":{
+        "startWeekday":6,
+        "endWeekday":7,
+        "discount":10
+      }
+    }
+  }
+}
