@@ -1,28 +1,37 @@
 package kestar;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import kestar.data.AgeGroup;
 import kestar.data.Client;
+import kestar.data.Discount;
 import kestar.data.SocialGroup;
+import kestar.data.TransportTimeLimit;
 import kestar.data.Vehicle;
-import kestar.data.VehicleType;
-import kestar.ui.MainWindow;
 
 public class Main {
 	public static void main(String [ ] args) {
-		DataHelper dataHelper = new DataHelper("data/itickets_data");
-		dataHelper.readData();
+		List<String> fileNames = new ArrayList<String>();
+		fileNames.add("data/clients");
+		fileNames.add("data/discounts");
+		fileNames.add("data/social_groups");
+		fileNames.add("data/transport");
+		fileNames.add("data/transport_time_data");
 		
-		List<AgeGroup> ageGroups = dataHelper.getAgeGroups();
+		DataHelper dataHelper = new DataHelper();
+		dataHelper.readData(fileNames);
+		
 		List<SocialGroup> socialGroups = dataHelper.getSocialGroups();
-		List<VehicleType> vehicleTypes = dataHelper.getVehicleTypes();
+		List<String> vehicleTypes = dataHelper.getVehicleTypes();
 		List<Client> clients = dataHelper.getClients();
 		List<Vehicle> vehicles = dataHelper.getVehicles();
+		Map<String, List<TransportTimeLimit>> timeLimits = dataHelper.getTimeLimits();
+		Map<String, List<Discount>> discounts = dataHelper.getDiscounts();
 		
-		dataHelper.writeData();
+		/*dataHelper.writeData();
 		
 		MainWindow testWindow = new MainWindow();
-		testWindow.setVisible(true);
+		testWindow.setVisible(true);*/
 	}
 }
