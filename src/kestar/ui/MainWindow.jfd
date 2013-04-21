@@ -14,6 +14,7 @@ new FormModel {
 			name: "this"
 			"title": new FormMessage( null, "MainWindow.this.title" )
 			"$sizePolicy": 0
+			"defaultCloseOperation": 2
 			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
 				name: "mainToolBar"
 				"floatable": false

@@ -36,13 +36,13 @@ public class DataHelper {
 	private Map<String, List<TransportTimeLimit>> timeLimits;
 	private Map<String, List<Discount>> discounts;
 	
-	private Map<String, List<String>> classFileMap;
+	private Map<File, List<String>> classFileMap;
 	
 	public DataHelper() {
 		factory = new JsonFactory();
 		mapper = new ObjectMapper();
 		
-		classFileMap = new HashMap<String, List<String>>();
+		classFileMap = new HashMap<File, List<String>>();
 	}
 	
 	//================================================================================
@@ -75,10 +75,10 @@ public class DataHelper {
 	//================================================================================
 	// Read methods
 	//================================================================================
-	public void readData(List<String> fileNames) {
+	public void readData(List<File> files) {
 		try {
-			for(String fileName: fileNames) {
-				readDataFromFile(fileName);
+			for(File file: files) {
+				readDataFromFile(file);
 			}
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
@@ -91,30 +91,30 @@ public class DataHelper {
 		}
 	}
 	
-	private void readDataFromFile(String fileName) throws JsonParseException, IOException {
-		JsonParser parser = factory.createJsonParser(new File(fileName));
+	private void readDataFromFile(File file) throws JsonParseException, IOException {
+		JsonParser parser = factory.createJsonParser(file);
 		
 		parser.nextToken();
 		while (parser.nextToken() != JsonToken.END_OBJECT) {
 			String fieldName = parser.getCurrentName();
 			parser.nextToken();
 			if ("socGroups".equals(fieldName)) {
-				addToClassFileMap("socGroups", fileName);
+				addToClassFileMap("socGroups", file);
 				socialGroups = readArray(parser, mapper, SocialGroup.class);
 			} else if ("clients".equals(fieldName)) {
-				addToClassFileMap("clients", fileName);
+				addToClassFileMap("clients", file);
 				clients = readArray(parser, mapper, Client.class);
 			} else if ("vehicles".equals(fieldName)) {
-				addToClassFileMap("vehicles", fileName);
+				addToClassFileMap("vehicles", file);
 				vehicles = readArray(parser, mapper, Vehicle.class);
 			} else if ("vehicleTypes".equals(fieldName)) {
-				addToClassFileMap("vehicleTypes", fileName);
+				addToClassFileMap("vehicleTypes", file);
 				vehicleTypes = mapper.readValue(parser, new TypeReference<List<String>>(){});
 			} else if ("timeLimits".equals(fieldName)) {
-				addToClassFileMap("timeLimits", fileName);
+				addToClassFileMap("timeLimits", file);
 				timeLimits = readListMap(parser, mapper, TransportTimeLimit.class);
 			} else if ("discounts".equals(fieldName)) {
-				addToClassFileMap("discounts", fileName);
+				addToClassFileMap("discounts", file);
 				discounts = readListMap(parser, mapper, Discount.class);
 			} else {
 				parser.skipChildren();
@@ -124,12 +124,12 @@ public class DataHelper {
 		parser.close();
 	}
 	
-	private void addToClassFileMap(String className, String fileName) {
-		if (!classFileMap.containsKey(fileName)) {
-			classFileMap.put(fileName, new LinkedList<String>());
+	private void addToClassFileMap(String className, File file) {
+		if (!classFileMap.containsKey(file)) {
+			classFileMap.put(file, new LinkedList<String>());
 		}
 		
-		classFileMap.get(fileName).add(className);
+		classFileMap.get(file).add(className);
 	}
 	
 	private <T> List<T> readArray(JsonParser parser, ObjectMapper mapper, Class<T> type)
@@ -161,11 +161,11 @@ public class DataHelper {
 	//================================================================================
 	public void writeData() {
 		try {
-			for (Map.Entry<String, List<String>> fileNameEntry: classFileMap.entrySet()) {
+			for (Map.Entry<File, List<String>> fileNameEntry: classFileMap.entrySet()) {
 				List<String> fieldNames = fileNameEntry.getValue();
-				String fileName = fileNameEntry.getKey();
+				File file = fileNameEntry.getKey();
 				
-				JsonGenerator generator = factory.createJsonGenerator(new File(fileName), JsonEncoding.UTF8);
+				JsonGenerator generator = factory.createJsonGenerator(file, JsonEncoding.UTF8);
 				generator.writeStartObject();
 				
 				for (String fieldName: fieldNames) {

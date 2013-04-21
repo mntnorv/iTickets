@@ -55,6 +55,7 @@ public class MainWindow extends JFrame {
 
 		//======== this ========
 		setTitle(bundle.getString("MainWindow.this.title"));
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new FormLayout(
 			"default:grow",

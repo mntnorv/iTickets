@@ -1,5 +1,6 @@
 package kestar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,18 +10,21 @@ import kestar.data.Discount;
 import kestar.data.SocialGroup;
 import kestar.data.TransportTimeLimit;
 import kestar.data.Vehicle;
+import kestar.ui.MainWindow;
 
 public class Main {
 	public static void main(String [ ] args) {
-		List<String> fileNames = new ArrayList<String>();
-		fileNames.add("data/clients");
-		fileNames.add("data/discounts");
-		fileNames.add("data/social_groups");
-		fileNames.add("data/transport");
-		fileNames.add("data/transport_time_data");
+		File dataFolder = new File("data");
+		File[] folderFileArray = dataFolder.listFiles();
+		List<File> fileList = new ArrayList<File>();
+		for (File file: folderFileArray) {
+			if (file.isFile()) {
+				fileList.add(file);
+			}
+		}
 		
 		DataHelper dataHelper = new DataHelper();
-		dataHelper.readData(fileNames);
+		dataHelper.readData(fileList);
 		
 		List<SocialGroup> socialGroups = dataHelper.getSocialGroups();
 		List<String> vehicleTypes = dataHelper.getVehicleTypes();
@@ -31,7 +35,7 @@ public class Main {
 		
 		dataHelper.writeData();
 		
-		/*MainWindow testWindow = new MainWindow();
-		testWindow.setVisible(true);*/
+		MainWindow testWindow = new MainWindow();
+		testWindow.setVisible(true);
 	}
 }
