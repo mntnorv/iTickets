@@ -29,9 +29,9 @@ public class Main {
 		Map<String, List<TransportTimeLimit>> timeLimits = dataHelper.getTimeLimits();
 		Map<String, List<Discount>> discounts = dataHelper.getDiscounts();
 		
-		/*dataHelper.writeData();
+		dataHelper.writeData();
 		
-		MainWindow testWindow = new MainWindow();
+		/*MainWindow testWindow = new MainWindow();
 		testWindow.setVisible(true);*/
 	}
 }
