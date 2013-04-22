@@ -4,14 +4,19 @@
 
 package kestar.ui;
 
+import java.text.ParseException;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.text.MaskFormatter;
 
 import kestar.DataHelper;
 import kestar.data.SocialGroup;
@@ -24,11 +29,21 @@ public class ClientsPanel extends JPanel {
 
 	private DataHelper dataHelper;
 	private JComboBox<String> socialGroupCombo;
+	private JTextField dateTextField;
 
 	public ClientsPanel() {
 		initComponents();
 		
 		socialGroupCombo = new JComboBox<String>();
+		
+		MaskFormatter dateFormatter = null;
+		try {
+			dateFormatter = new MaskFormatter("####-##-##");
+			dateTextField = new JFormattedTextField(dateFormatter);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void setDataHelper(DataHelper newDataHelper) {
@@ -47,6 +62,7 @@ public class ClientsPanel extends JPanel {
 			socialGroupCombo.addItem(group.getName());
 		}
 		
+		clientsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(dateTextField));
 		clientsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(socialGroupCombo));
 	}
 

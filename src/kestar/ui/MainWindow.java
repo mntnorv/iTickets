@@ -68,8 +68,8 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new FormLayout(
-				"default:grow",
-				"default, $lgap, fill:default:grow"));
+			"default:grow",
+			"default, $lgap, fill:default:grow"));
 
 		//======== mainToolBar ========
 		{

@@ -1,9 +1,12 @@
 package kestar.ui;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -14,11 +17,17 @@ import kestar.data.Client;
 public class ClientsTableModel implements TableModel {
 	
 	private static final int COLUMN_COUNT = 5;
-	private static final String[] COLUMN_NAMES = new String[] {
-		"Vardas", "Pavardë", "Lytis", "Gimimo data", "Socialinë grupë"
+	
+	private static final String COLUMN_RESOURCE_NAMES[] = new String[] {
+		"ClientsTableModel.firstNameColumn.text",
+		"ClientsTableModel.lastNameColumn.text",
+		"ClientsTableModel.sexColumn.text",
+		"ClientsTableModel.birthdayColumn.text",
+		"ClientsTableModel.socialGroupColumn.text"
 	};
+	
 	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[] {
-		String.class, String.class, String.class, Calendar.class, String.class
+		String.class, String.class, String.class, String.class, String.class
 	};
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
@@ -27,6 +36,7 @@ public class ClientsTableModel implements TableModel {
 	
 	//================================================================================
 	
+	private ResourceBundle resBundle;
 	private List<Client> data;
 	private List<TableModelListener> listeners;
 	
@@ -36,6 +46,7 @@ public class ClientsTableModel implements TableModel {
 		this.data = data;
 		
 		listeners = new ArrayList<TableModelListener>();
+		resBundle = ResourceBundle.getBundle("kestar.strings");
 	}
 	
 	//================================================================================
@@ -59,7 +70,7 @@ public class ClientsTableModel implements TableModel {
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		return COLUMN_NAMES[columnIndex];
+		return resBundle.getString(COLUMN_RESOURCE_NAMES[columnIndex]);
 	}
 
 	@Override
@@ -132,7 +143,13 @@ public class ClientsTableModel implements TableModel {
 			client.setSex((String) value);
 			break;
 		case 3:
-			client.setBirthday((Calendar) value);
+			Calendar newBirthday = GregorianCalendar.getInstance();
+			try {
+				newBirthday.setTime(DATE_FORMAT.parse((String) value));
+				client.setBirthday(newBirthday);
+			} catch (ParseException e) {
+				/* do nothing */
+			}
 			break;
 		case 4:
 			client.setSocialGroup((String) value);
