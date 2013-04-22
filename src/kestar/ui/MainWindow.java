@@ -19,24 +19,24 @@ import com.jgoodies.forms.layout.*;
  */
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	private DataHelper dataHelper;
-	
+
 	public MainWindow() {
 		try {
 			UIManager.setLookAndFeel(
-			        UIManager.getSystemLookAndFeelClassName());
+					UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			System.err.println("Error setting system look and feel");
 		}
-		
+
 		initComponents();
 	}
-	
+
 	public void setDataHelper(DataHelper dataHelper) {
 		this.dataHelper = dataHelper;
-		
-		clientsPanel.setClients(this.dataHelper.getClients());
+
+		clientsPanel.setDataHelper(this.dataHelper);
 	}
 
 	private void dataTabbedPaneStateChanged(ChangeEvent e) {
@@ -68,8 +68,8 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new FormLayout(
-			"default:grow",
-			"default, $lgap, fill:default:grow"));
+				"default:grow",
+				"default, $lgap, fill:default:grow"));
 
 		//======== mainToolBar ========
 		{

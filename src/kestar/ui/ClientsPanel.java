@@ -4,30 +4,50 @@
 
 package kestar.ui;
 
-import java.util.List;
-
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
-import kestar.data.Client;
+import kestar.DataHelper;
+import kestar.data.SocialGroup;
 
 /**
  * @author Kestutis Taraskevicius
  */
 public class ClientsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
-	private List<Client> clients;
-	
+
+	private DataHelper dataHelper;
+	private JComboBox<String> socialGroupCombo;
+
 	public ClientsPanel() {
 		initComponents();
+		
+		socialGroupCombo = new JComboBox<String>();
 	}
-	
-	public void setClients(List<Client> clients) {
-		this.clients = clients;
-		clientsTable.setModel(new ClientsTableModel(this.clients));
+
+	public void setDataHelper(DataHelper newDataHelper) {
+		dataHelper = newDataHelper;
+		
+		clientsTable.setModel(new ClientsTableModel(dataHelper.getClients()));
+		
+		clientsTable.getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				dataHelper.writeData();
+			}
+		});
+		
+		for (SocialGroup group: dataHelper.getSocialGroups()) {
+			socialGroupCombo.addItem(group.getName());
+		}
+		
+		clientsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(socialGroupCombo));
 	}
 
 	private void initComponents() {

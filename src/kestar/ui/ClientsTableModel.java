@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
@@ -84,6 +85,11 @@ public class ClientsTableModel implements TableModel {
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		setColumnOfClient(data.get(rowIndex), columnIndex, aValue);
+		
+		TableModelEvent event = new TableModelEvent(this, rowIndex, rowIndex, columnIndex);
+		for (TableModelListener listener: listeners) {
+			listener.tableChanged(event);
+		}
 	}
 	
 	//================================================================================
