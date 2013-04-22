@@ -11,6 +11,7 @@ public class Client {
 	private String sex;
 	private String socialGroup;
 	private Calendar birthday;
+	private double balance;
 	
 	public Client() {
 		firstName = "";
@@ -21,13 +22,14 @@ public class Client {
 	}
 
 	public Client(String firstName, String lastName, String sex,
-			String socialGroup, Calendar birthday) {
+			String socialGroup, Calendar birthday, double balance) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.sex = sex;
 		this.socialGroup = socialGroup;
 		this.birthday = birthday;
+		this.balance = balance;
 	}
 
 	public String getFirstName() {
@@ -70,6 +72,14 @@ public class Client {
 		this.birthday = birthday;
 	}
 	
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
 	@JsonIgnore
 	public int getAge() {
 		Calendar now = GregorianCalendar.getInstance();

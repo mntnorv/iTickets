@@ -16,18 +16,19 @@ import kestar.data.Client;
 
 public class ClientsTableModel implements TableModel {
 	
-	private static final int COLUMN_COUNT = 5;
+	private static final int COLUMN_COUNT = 6;
 	
 	private static final String COLUMN_RESOURCE_NAMES[] = new String[] {
 		"ClientsTableModel.firstNameColumn.text",
 		"ClientsTableModel.lastNameColumn.text",
 		"ClientsTableModel.sexColumn.text",
 		"ClientsTableModel.birthdayColumn.text",
-		"ClientsTableModel.socialGroupColumn.text"
+		"ClientsTableModel.socialGroupColumn.text",
+		"ClientsTableModel.balanceColumn.text"
 	};
 	
 	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[] {
-		String.class, String.class, String.class, String.class, String.class
+		String.class, String.class, String.class, String.class, String.class, Double.class
 	};
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
@@ -85,7 +86,7 @@ public class ClientsTableModel implements TableModel {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return true;
+		return columnIndex < 5;
 	}
 
 	@Override
@@ -125,6 +126,9 @@ public class ClientsTableModel implements TableModel {
 			break;
 		case 4:
 			columnObject = client.getSocialGroup();
+			break;
+		case 5:
+			columnObject = client.getBalance();
 			break;
 		}
 		
