@@ -9,6 +9,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import kestar.DataHelper;
+
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 
@@ -17,6 +19,8 @@ import com.jgoodies.forms.layout.*;
  */
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+	private DataHelper dataHelper;
 	
 	public MainWindow() {
 		try {
@@ -27,6 +31,12 @@ public class MainWindow extends JFrame {
 		}
 		
 		initComponents();
+	}
+	
+	public void setDataHelper(DataHelper dataHelper) {
+		this.dataHelper = dataHelper;
+		
+		clientsPanel.setClients(this.dataHelper.getClients());
 	}
 
 	private void dataTabbedPaneStateChanged(ChangeEvent e) {

@@ -14,6 +14,7 @@ import kestar.ui.MainWindow;
 
 public class Main {
 	public static void main(String [ ] args) {
+		// Read data
 		File dataFolder = new File("data");
 		File[] folderFileArray = dataFolder.listFiles();
 		List<File> fileList = new ArrayList<File>();
@@ -26,16 +27,9 @@ public class Main {
 		DataHelper dataHelper = new DataHelper();
 		dataHelper.readData(fileList);
 		
-		List<SocialGroup> socialGroups = dataHelper.getSocialGroups();
-		List<String> vehicleTypes = dataHelper.getVehicleTypes();
-		List<Client> clients = dataHelper.getClients();
-		List<Vehicle> vehicles = dataHelper.getVehicles();
-		Map<String, List<TransportTimeLimit>> timeLimits = dataHelper.getTimeLimits();
-		Map<String, List<Discount>> discounts = dataHelper.getDiscounts();
-		
-		dataHelper.writeData();
-		
+		// Open main window
 		MainWindow testWindow = new MainWindow();
+		testWindow.setDataHelper(dataHelper);
 		testWindow.setVisible(true);
 	}
 }

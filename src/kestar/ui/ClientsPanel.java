@@ -4,7 +4,14 @@
 
 package kestar.ui;
 
-import javax.swing.*;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import kestar.data.Client;
 
 /**
  * @author Kestutis Taraskevicius
@@ -12,28 +19,35 @@ import javax.swing.*;
 public class ClientsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
+	private List<Client> clients;
+	
 	public ClientsPanel() {
 		initComponents();
+	}
+	
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+		clientsTable.setModel(new ClientsTableModel(this.clients));
 	}
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		scrollPane1 = new JScrollPane();
-		table1 = new JTable();
+		scrollPane = new JScrollPane();
+		clientsTable = new JTable();
 
 		//======== this ========
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		//======== scrollPane1 ========
+		//======== scrollPane ========
 		{
-			scrollPane1.setViewportView(table1);
+			scrollPane.setViewportView(clientsTable);
 		}
-		add(scrollPane1);
+		add(scrollPane);
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	private JScrollPane scrollPane1;
-	private JTable table1;
+	private JScrollPane scrollPane;
+	private JTable clientsTable;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }
