@@ -1,18 +1,1 @@
-{
-  "clients":[
-    {
-      "firstName":"Testas",
-      "lastName":"Testauskas",
-      "sex":"m",
-      "socialGroup":"Soc. grupė 1",
-      "birthday":502243200000
-    },
-    {
-      "firstName":"Testovas",
-      "lastName":"Testovivičius",
-      "sex":"m",
-      "socialGroup":"Soc. grupė 2",
-      "birthday":631152000000
-    }
-  ]
-}
+{"clients":[{"firstName":"Testas","lastName":"Testauskas","sex":"m","socialGroup":"Soc. grupė 1","birthday":502243200000,"balance":0.0},{"firstName":"Testovas","lastName":"Testovivičius","sex":"m","socialGroup":"Soc. grupė 2","birthday":631152000000,"balance":0.0}]}

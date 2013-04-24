@@ -1,18 +1,1 @@
-{
-  "timeLimits":{
-    "Autobusai 1":[
-      {
-        "fromWeekday":1,
-        "toWeekday":5,
-        "fromTime":"08:00",
-        "toTime":"22:00"
-      },
-      {
-        "fromWeekday":6,
-        "toWeekday":7,
-        "fromTime":"09:00",
-        "toTime":"21:00"
-      }
-    ]
-  }
-}
+{"timeLimits":{"Autobusai 1":[{"fromWeekday":1,"toWeekday":5,"fromTime":"08:00:00","toTime":"22:00:00"},{"fromWeekday":6,"toWeekday":7,"fromTime":"09:00:00","toTime":"21:00:00"}]}}

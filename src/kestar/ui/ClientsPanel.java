@@ -19,6 +19,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.text.MaskFormatter;
 
 import kestar.DataHelper;
+import kestar.data.Sex;
 import kestar.data.SocialGroup;
 
 /**
@@ -29,12 +30,16 @@ public class ClientsPanel extends JPanel {
 
 	private DataHelper dataHelper;
 	private JComboBox<String> socialGroupCombo;
+	private JComboBox<Sex> sexCombo;
 	private JTextField dateTextField;
 
 	public ClientsPanel() {
 		initComponents();
 		
 		socialGroupCombo = new JComboBox<String>();
+		sexCombo = new JComboBox<Sex>();
+		sexCombo.addItem(Sex.MALE);
+		sexCombo.addItem(Sex.FEMALE);
 		
 		MaskFormatter dateFormatter = null;
 		try {
@@ -58,12 +63,25 @@ public class ClientsPanel extends JPanel {
 			}
 		});
 		
+		initColumnEditors();
+	}
+	
+	private void initColumnEditors() {
 		for (SocialGroup group: dataHelper.getSocialGroups()) {
 			socialGroupCombo.addItem(group.getName());
 		}
 		
-		clientsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(dateTextField));
-		clientsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(socialGroupCombo));
+		clientsTable.getColumnModel()
+		.getColumn(ClientsTableModel.SEX_COLUMN)
+		.setCellEditor(new DefaultCellEditor(sexCombo));
+		
+		clientsTable.getColumnModel()
+		.getColumn(ClientsTableModel.BIRTHDAY_COLUMN)
+		.setCellEditor(new DefaultCellEditor(dateTextField));
+		
+		clientsTable.getColumnModel()
+		.getColumn(ClientsTableModel.SOCIAL_GROUP_COLUMN)
+		.setCellEditor(new DefaultCellEditor(socialGroupCombo));
 	}
 
 	private void initComponents() {

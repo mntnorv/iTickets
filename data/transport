@@ -1,16 +1,1 @@
-{
-  "vehicleTypes":[
-    "autobusas",
-    "troleibusas",
-    "mikroautobusas"
-  ],
-  "vehicles":[
-    {
-      "type":1,
-      "route":1,
-      "price":10.0,
-      "timeData":"Autobusai 1",
-      "discountGroup":"Autobusai 1"
-    }
-  ]
-}
+{"vehicleTypes":["autobusas","troleibusas","mikroautobusas"],"vehicles":[{"type":1,"route":1,"price":10.0,"timeData":"Autobusai 1","discountGroup":"Autobusai 1"}]}

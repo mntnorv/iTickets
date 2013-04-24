@@ -1,12 +1,1 @@
-{
-	"socGroups":[
-    {
-      "name":"Soc grupė 1",
-      "discount":10.0
-    },
-    {
-      "name":"Soc grupė 2",
-      "discount":10.0
-    }
-  ]
-}
+{"socGroups":[{"name":"Soc grupė 1","discount":10.0},{"name":"Soc grupė 2","discount":10.0}]}

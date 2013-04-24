@@ -13,8 +13,16 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import kestar.data.Client;
+import kestar.data.Sex;
 
 public class ClientsTableModel implements TableModel {
+	
+	public static final int FIRST_NAME_COLUMN = 0;
+	public static final int LAST_NAME_COLUMN = 1;
+	public static final int SEX_COLUMN = 2;
+	public static final int BIRTHDAY_COLUMN = 3;
+	public static final int SOCIAL_GROUP_COLUMN = 4;
+	public static final int BALANCE_COLUMN = 5;
 	
 	private static final int COLUMN_COUNT = 6;
 	
@@ -112,22 +120,25 @@ public class ClientsTableModel implements TableModel {
 		Object columnObject = null;
 		
 		switch (columnIndex) {
-		case 0:
+		case FIRST_NAME_COLUMN:
 			columnObject = client.getFirstName();
 			break;
-		case 1:
+		case LAST_NAME_COLUMN:
 			columnObject = client.getLastName();
 			break;
-		case 2:
-			columnObject = client.getSex();
+		case SEX_COLUMN:
+			columnObject = Sex.MALE;
+			if (client.getSex().equals(Sex.FEMALE.getId())) {
+				columnObject = Sex.FEMALE;
+			}
 			break;
-		case 3:
+		case BIRTHDAY_COLUMN:
 			columnObject = DATE_FORMAT.format(client.getBirthday().getTime());
 			break;
-		case 4:
+		case SOCIAL_GROUP_COLUMN:
 			columnObject = client.getSocialGroup();
 			break;
-		case 5:
+		case BALANCE_COLUMN:
 			columnObject = client.getBalance();
 			break;
 		}
@@ -137,16 +148,16 @@ public class ClientsTableModel implements TableModel {
 
 	private void setColumnOfClient(Client client, int columnIndex, Object value) {
 		switch (columnIndex) {
-		case 0:
+		case FIRST_NAME_COLUMN:
 			client.setFirstName((String) value);
 			break;
-		case 1:
+		case LAST_NAME_COLUMN:
 			client.setLastName((String) value);
 			break;
-		case 2:
-			client.setSex((String) value);
+		case SEX_COLUMN:
+			client.setSex(((Sex)value).getId());
 			break;
-		case 3:
+		case BIRTHDAY_COLUMN:
 			Calendar newBirthday = GregorianCalendar.getInstance();
 			try {
 				newBirthday.setTime(DATE_FORMAT.parse((String) value));
@@ -155,7 +166,7 @@ public class ClientsTableModel implements TableModel {
 				/* do nothing */
 			}
 			break;
-		case 4:
+		case SOCIAL_GROUP_COLUMN:
 			client.setSocialGroup((String) value);
 			break;
 		}
