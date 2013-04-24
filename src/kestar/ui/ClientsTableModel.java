@@ -2,20 +2,19 @@ package kestar.ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
+import javax.swing.table.AbstractTableModel;
 
 import kestar.data.Client;
 import kestar.data.Sex;
 
-public class ClientsTableModel implements TableModel {
+public class ClientsTableModel extends AbstractTableModel {
+	
+	private static final long serialVersionUID = 1L;
 	
 	public static final int FIRST_NAME_COLUMN = 0;
 	public static final int LAST_NAME_COLUMN = 1;
@@ -36,7 +35,7 @@ public class ClientsTableModel implements TableModel {
 	};
 	
 	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[] {
-		String.class, String.class, String.class, String.class, String.class, Double.class
+		String.class, String.class, Sex.class, String.class, String.class, Double.class
 	};
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
@@ -47,25 +46,18 @@ public class ClientsTableModel implements TableModel {
 	
 	private ResourceBundle resBundle;
 	private List<Client> data;
-	private List<TableModelListener> listeners;
 	
 	//================================================================================
 	
 	public ClientsTableModel(List<Client> data) {
 		this.data = data;
 		
-		listeners = new ArrayList<TableModelListener>();
 		resBundle = ResourceBundle.getBundle("kestar.strings");
 	}
 	
 	//================================================================================
 	// TableModel overrides
 	//================================================================================
-	
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		listeners.add(l);
-	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
@@ -98,18 +90,9 @@ public class ClientsTableModel implements TableModel {
 	}
 
 	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		listeners.remove(l);
-	}
-
-	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		setColumnOfClient(data.get(rowIndex), columnIndex, aValue);
-		
-		TableModelEvent event = new TableModelEvent(this, rowIndex, rowIndex, columnIndex);
-		for (TableModelListener listener: listeners) {
-			listener.tableChanged(event);
-		}
+		fireTableCellUpdated(rowIndex, columnIndex);
 	}
 	
 	//================================================================================

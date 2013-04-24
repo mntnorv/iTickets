@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.0.0.51" Java: "1.7.0_13" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.0.0.51" Java: "1.7.0_09" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
@@ -22,11 +22,13 @@ new FormModel {
 					name: "addButton"
 					"text": new FormMessage( null, "MainWindow.addButton.text" )
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/add.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "removeButton"
 					"text": new FormMessage( null, "MainWindow.removeButton.text" )
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/delete.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "removeButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buyButton"
@@ -68,7 +70,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 520, 405 )
+			"size": new java.awt.Dimension( 570, 480 )
 		} )
 	}
 }

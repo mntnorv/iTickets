@@ -19,19 +19,22 @@ import javax.swing.event.TableModelListener;
 import javax.swing.text.MaskFormatter;
 
 import kestar.DataHelper;
+import kestar.data.Client;
 import kestar.data.Sex;
 import kestar.data.SocialGroup;
 
 /**
  * @author Kestutis Taraskevicius
  */
-public class ClientsPanel extends JPanel {
+public class ClientsPanel extends JPanel implements DataManager {
 	private static final long serialVersionUID = 1L;
 
 	private DataHelper dataHelper;
 	private JComboBox<String> socialGroupCombo;
 	private JComboBox<Sex> sexCombo;
 	private JTextField dateTextField;
+	
+	private ClientsTableModel clientsTableModel;
 
 	public ClientsPanel() {
 		initComponents();
@@ -46,17 +49,17 @@ public class ClientsPanel extends JPanel {
 			dateFormatter = new MaskFormatter("####-##-##");
 			dateTextField = new JFormattedTextField(dateFormatter);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			/* do nothing */
 		}
 	}
 
 	public void setDataHelper(DataHelper newDataHelper) {
 		dataHelper = newDataHelper;
 		
-		clientsTable.setModel(new ClientsTableModel(dataHelper.getClients()));
+		clientsTableModel = new ClientsTableModel(dataHelper.getClients());
+		clientsTable.setModel(clientsTableModel);
 		
-		clientsTable.getModel().addTableModelListener(new TableModelListener() {
+		clientsTableModel.addTableModelListener(new TableModelListener() {
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				dataHelper.writeData();
@@ -64,13 +67,33 @@ public class ClientsPanel extends JPanel {
 		});
 		
 		initColumnEditors();
+		updateColumnEditors();
 	}
 	
-	private void initColumnEditors() {
+	public void updateColumnEditors() {
+		socialGroupCombo.removeAllItems();
 		for (SocialGroup group: dataHelper.getSocialGroups()) {
 			socialGroupCombo.addItem(group.getName());
 		}
-		
+	}
+	
+	@Override
+	public void addNewElement() {
+		int oldCount = dataHelper.getClients().size();
+		dataHelper.getClients().add(new Client());
+		clientsTableModel.fireTableRowsInserted(oldCount - 1, oldCount);
+	}
+
+	@Override
+	public void removeSelection() {
+		int selection[] = clientsTable.getSelectedRows();
+		for (int i = selection.length - 1; i >= 0; i--) {
+			dataHelper.getClients().remove(selection[i]);
+		}
+		clientsTableModel.fireTableDataChanged();
+	}
+	
+	private void initColumnEditors() {
 		clientsTable.getColumnModel()
 		.getColumn(ClientsTableModel.SEX_COLUMN)
 		.setCellEditor(new DefaultCellEditor(sexCombo));

@@ -5,12 +5,12 @@
 package kestar.ui;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
 import kestar.DataHelper;
-
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 
@@ -19,6 +19,9 @@ import com.jgoodies.forms.layout.*;
  */
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+	private static final int CLIENTS_TAB = 0;
+	private static final int VEHICLES_TAB = 1;
 
 	private DataHelper dataHelper;
 
@@ -40,7 +43,7 @@ public class MainWindow extends JFrame {
 	}
 
 	private void dataTabbedPaneStateChanged(ChangeEvent e) {
-		if (dataTabbedPane.getSelectedIndex() == 0) {
+		if (dataTabbedPane.getSelectedIndex() == CLIENTS_TAB) {
 			buyButton.setEnabled(true);
 			transferButton.setEnabled(true);
 		} else {
@@ -49,8 +52,29 @@ public class MainWindow extends JFrame {
 		}
 	}
 
+	private void addButtonActionPerformed(ActionEvent e) {
+		switch (dataTabbedPane.getSelectedIndex()) {
+		case CLIENTS_TAB:
+			clientsPanel.addNewElement();
+			break;
+		case VEHICLES_TAB:
+			break;
+		}
+	}
+
+	private void removeButtonActionPerformed(ActionEvent e) {
+		switch (dataTabbedPane.getSelectedIndex()) {
+		case CLIENTS_TAB:
+			clientsPanel.removeSelection();
+			break;
+		case VEHICLES_TAB:
+			break;
+		}
+	}
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		// Generated using JFormDesigner Evaluation license - KÄstutis TaraskeviÄius
 		ResourceBundle bundle = ResourceBundle.getBundle("kestar.strings");
 		mainToolBar = new JToolBar();
 		addButton = new JButton();
@@ -78,11 +102,23 @@ public class MainWindow extends JFrame {
 			//---- addButton ----
 			addButton.setText(bundle.getString("MainWindow.addButton.text"));
 			addButton.setIcon(new ImageIcon(getClass().getResource("/kestar/icons/add.png")));
+			addButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					addButtonActionPerformed(e);
+				}
+			});
 			mainToolBar.add(addButton);
 
 			//---- removeButton ----
 			removeButton.setText(bundle.getString("MainWindow.removeButton.text"));
 			removeButton.setIcon(new ImageIcon(getClass().getResource("/kestar/icons/delete.png")));
+			removeButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					removeButtonActionPerformed(e);
+				}
+			});
 			mainToolBar.add(removeButton);
 
 			//---- buyButton ----
@@ -122,6 +158,7 @@ public class MainWindow extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+	// Generated using JFormDesigner Evaluation license - KÄstutis TaraskeviÄius
 	private JToolBar mainToolBar;
 	private JButton addButton;
 	private JButton removeButton;
