@@ -72,9 +72,13 @@ public class MainWindow extends JFrame {
 		}
 	}
 
+	private void buyButtonActionPerformed(ActionEvent e) {
+		BuyTicketDialog buyDialog = new BuyTicketDialog(this);
+		buyDialog.setVisible(true);
+	}
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - KÄstutis TaraskeviÄius
 		ResourceBundle bundle = ResourceBundle.getBundle("kestar.strings");
 		mainToolBar = new JToolBar();
 		addButton = new JButton();
@@ -124,6 +128,12 @@ public class MainWindow extends JFrame {
 			//---- buyButton ----
 			buyButton.setText(bundle.getString("MainWindow.buyButton.text"));
 			buyButton.setIcon(new ImageIcon(getClass().getResource("/kestar/icons/money_dollar.png")));
+			buyButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					buyButtonActionPerformed(e);
+				}
+			});
 			mainToolBar.add(buyButton);
 
 			//---- transferButton ----
@@ -158,7 +168,6 @@ public class MainWindow extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - KÄstutis TaraskeviÄius
 	private JToolBar mainToolBar;
 	private JButton addButton;
 	private JButton removeButton;

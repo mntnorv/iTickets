@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.0.0.51" Java: "1.7.0_09" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.0.0.51" Java: "1.7.0_13" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
@@ -34,6 +34,7 @@ new FormModel {
 					name: "buyButton"
 					"text": new FormMessage( null, "MainWindow.buyButton.text" )
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/kestar/icons/money_dollar.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buyButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "transferButton"

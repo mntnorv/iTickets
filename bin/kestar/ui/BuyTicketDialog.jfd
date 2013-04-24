@@ -1,0 +1,142 @@
+JFDML JFormDesigner: "5.1.0.0.51" Java: "1.7.0_13" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundlePackage": "kestar"
+	"i18n.bundleName": "strings"
+	"i18n.keyPrefix": "BuyTicketDialog"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "default:grow, labelcompgap, default:grow, labelcompgap, default:grow, labelcompgap, default"
+			"$rowSpecs": "default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default:grow, linegap, default"
+		} ) {
+			name: "this"
+			"title": new FormMessage( null, "BuyTicketDialog.this.title" )
+			"defaultCloseOperation": 2
+			"modal": true
+			"resizable": false
+			"$sizePolicy": 1
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "vehicleTypeComboBox"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridWidth": 7
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "vehicleComboBox"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 3
+				"gridWidth": 7
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "dateTextField"
+				"cursor": new java.awt.Cursor( 2 )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 5
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "timeTextField"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 5
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "balanceNameLabel"
+				"text": new FormMessage( null, "BuyTicketDialog.balanceNameLabel.text" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "balanceLabel"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 7
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "currencyLabel1"
+				"text": new FormMessage( null, "Currency.name" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "fullPriceNameLabel"
+				"text": new FormMessage( null, "BuyTicketDialog.fullPriceNameLabel.text" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "fullPriceLabel"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 9
+				"gridWidth": 3
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "currencyLabel2"
+				"text": new FormMessage( null, "Currency.name" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "discountNameLabel"
+				"text": new FormMessage( null, "BuyTicketDialog.discountNameLabel.text" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 11
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "discountLabel"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 11
+				"gridWidth": 3
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "currencyLabel3"
+				"text": new FormMessage( null, "Currency.name" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 11
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "finalPriceNameLabel"
+				"text": new FormMessage( null, "BuyTicketDialog.finalPriceNameLabel.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 13
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "finalPriceLabel"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 13
+				"gridWidth": 3
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "currencyLabel4"
+				"text": new FormMessage( null, "Currency.name" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 13
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buyButton"
+				"text": new FormMessage( null, "BuyTicketDialog.buyButton.text" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 15
+				"gridWidth": 7
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 260, 240 )
+		} )
+	}
+}
