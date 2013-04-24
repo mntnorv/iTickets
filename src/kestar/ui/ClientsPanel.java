@@ -4,7 +4,10 @@
 
 package kestar.ui;
 
+import java.awt.event.*;
 import java.text.ParseException;
+import java.util.*;
+import javax.swing.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
@@ -107,24 +110,68 @@ public class ClientsPanel extends JPanel implements DataManager {
 		.setCellEditor(new DefaultCellEditor(socialGroupCombo));
 	}
 
+	private void clientsTableMouseReleased(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			int clickedRow = clientsTable.rowAtPoint(e.getPoint());
+	        if (clickedRow >= 0 && clickedRow < clientsTable.getRowCount()) {
+	        	clientsTable.setRowSelectionInterval(clickedRow, clickedRow);
+	        	rightClickMenu.show(clientsTable, e.getPoint().x, e.getPoint().y);
+	        }
+		}
+	}
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		ResourceBundle bundle = ResourceBundle.getBundle("kestar.strings");
 		scrollPane = new JScrollPane();
 		clientsTable = new JTable();
+		rightClickMenu = new JPopupMenu();
+		buyTicketItem = new JMenuItem();
+		transferButton = new JMenuItem();
+		removeButton = new JMenuItem();
 
 		//======== this ========
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 		//======== scrollPane ========
 		{
+
+			//---- clientsTable ----
+			clientsTable.setRowHeight(24);
+			clientsTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					clientsTableMouseReleased(e);
+				}
+			});
 			scrollPane.setViewportView(clientsTable);
 		}
 		add(scrollPane);
+
+		//======== rightClickMenu ========
+		{
+
+			//---- buyTicketItem ----
+			buyTicketItem.setText(bundle.getString("ClientsPanel.buyTicketItem.text"));
+			rightClickMenu.add(buyTicketItem);
+
+			//---- transferButton ----
+			transferButton.setText(bundle.getString("ClientsPanel.transferButton.text"));
+			rightClickMenu.add(transferButton);
+
+			//---- removeButton ----
+			removeButton.setText(bundle.getString("ClientsPanel.removeButton.text"));
+			rightClickMenu.add(removeButton);
+		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	private JScrollPane scrollPane;
 	private JTable clientsTable;
+	private JPopupMenu rightClickMenu;
+	private JMenuItem buyTicketItem;
+	private JMenuItem transferButton;
+	private JMenuItem removeButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

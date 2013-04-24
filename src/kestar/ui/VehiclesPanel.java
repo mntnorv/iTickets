@@ -26,6 +26,9 @@ public class VehiclesPanel extends JPanel {
 
 		//======== scrollPane1 ========
 		{
+
+			//---- table1 ----
+			table1.setRowHeight(24);
 			scrollPane1.setViewportView(table1);
 		}
 		add(scrollPane1);

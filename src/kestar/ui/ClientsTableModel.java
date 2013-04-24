@@ -35,7 +35,7 @@ public class ClientsTableModel extends AbstractTableModel {
 	};
 	
 	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[] {
-		String.class, String.class, Sex.class, String.class, String.class, Double.class
+		String.class, String.class, Sex.class, String.class, String.class, String.class
 	};
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
@@ -122,7 +122,7 @@ public class ClientsTableModel extends AbstractTableModel {
 			columnObject = client.getSocialGroup();
 			break;
 		case BALANCE_COLUMN:
-			columnObject = client.getBalance();
+			columnObject = String.format("%.2f", client.getBalance());
 			break;
 		}
 		
