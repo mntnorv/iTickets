@@ -4,17 +4,25 @@
 
 package kestar.ui;
 
-import java.awt.*;
-import java.text.ParseException;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.text.MaskFormatter;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.util.ResourceBundle;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.WindowConstants;
+import com.toedter.calendar.*;
 
 import kestar.DataManager;
 import kestar.data.Vehicle;
 
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.factories.CC;
+import com.jgoodies.forms.layout.FormLayout;
 
 /**
  * @author Kestutis Taraskevicius
@@ -42,7 +50,7 @@ public class BuyTicketDialog extends JDialog {
 		ResourceBundle bundle = ResourceBundle.getBundle("kestar.strings");
 		vehicleTypeComboBox = new JComboBox<>();
 		vehicleComboBox = new JComboBox<>();
-		dateTextField = new JFormattedTextField();
+		dateChooser = new JDateChooser();
 		timeTextField = new JFormattedTextField();
 		balanceNameLabel = new JLabel();
 		balanceLabel = new JLabel();
@@ -74,10 +82,7 @@ public class BuyTicketDialog extends JDialog {
 		}
 		contentPane.add(vehicleTypeComboBox, CC.xywh(3, 3, 7, 1));
 		contentPane.add(vehicleComboBox, CC.xywh(3, 5, 7, 1));
-
-		//---- dateTextField ----
-		dateTextField.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		contentPane.add(dateTextField, CC.xywh(3, 7, 3, 1));
+		contentPane.add(dateChooser, CC.xywh(3, 7, 3, 1));
 		contentPane.add(timeTextField, CC.xywh(7, 7, 3, 1));
 
 		//---- balanceNameLabel ----
@@ -123,20 +128,12 @@ public class BuyTicketDialog extends JDialog {
 		setSize(250, 265);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-		
-		//---- dateFormatter ----
-		MaskFormatter dateFormatter = null;
-		try {
-			dateFormatter = new MaskFormatter("####-##-##");
-		} catch (ParseException e) {
-			/* do nothing */
-		}
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	private JComboBox<String> vehicleTypeComboBox;
 	private JComboBox<Vehicle> vehicleComboBox;
-	private JFormattedTextField dateTextField;
+	private JDateChooser dateChooser;
 	private JFormattedTextField timeTextField;
 	private JLabel balanceNameLabel;
 	private JLabel balanceLabel;

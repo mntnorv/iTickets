@@ -38,13 +38,12 @@ new FormModel {
 				"gridWidth": 7
 				"gridX": 3
 			} )
-			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "dateTextField"
-				"cursor": new java.awt.Cursor( 2 )
+			add( new FormComponent( "com.toedter.calendar.JDateChooser" ) {
+				name: "dateChooser"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
 				"gridY": 7
 				"gridWidth": 3
-				"gridX": 3
 			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "timeTextField"
