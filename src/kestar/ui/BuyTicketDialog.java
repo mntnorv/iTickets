@@ -5,7 +5,6 @@
 package kestar.ui;
 
 import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.util.ResourceBundle;

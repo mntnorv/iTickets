@@ -3,6 +3,7 @@ package kestar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.UIManager;
 
@@ -11,6 +12,7 @@ import kestar.ui.MainWindow;
 public class Main {
 	public static void main(String [ ] args) {
 		setSystemLookAndFeel();
+		Locale.setDefault(Locale.forLanguageTag("lt-LT"));
 		
 		// Read data
 		File dataFolder = new File("data");

@@ -1,9 +1,6 @@
 package kestar.ui;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,12 +32,8 @@ public class ClientsTableModel extends AbstractTableModel {
 	};
 	
 	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[] {
-		String.class, String.class, Sex.class, String.class, String.class, String.class
+		String.class, String.class, Sex.class, Calendar.class, String.class, String.class
 	};
-	
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-		"yyyy-MM-dd"
-	);
 	
 	//================================================================================
 	
@@ -116,7 +109,7 @@ public class ClientsTableModel extends AbstractTableModel {
 			}
 			break;
 		case BIRTHDAY_COLUMN:
-			columnObject = DATE_FORMAT.format(client.getBirthday().getTime());
+			columnObject = client.getBirthday();
 			break;
 		case SOCIAL_GROUP_COLUMN:
 			columnObject = client.getSocialGroup();
@@ -141,13 +134,7 @@ public class ClientsTableModel extends AbstractTableModel {
 			client.setSex(((Sex)value).getId());
 			break;
 		case BIRTHDAY_COLUMN:
-			Calendar newBirthday = GregorianCalendar.getInstance();
-			try {
-				newBirthday.setTime(DATE_FORMAT.parse((String) value));
-				client.setBirthday(newBirthday);
-			} catch (ParseException e) {
-				/* do nothing */
-			}
+			client.setBirthday((Calendar) value);
 			break;
 		case SOCIAL_GROUP_COLUMN:
 			client.setSocialGroup((String) value);

@@ -40,5 +40,33 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 		} )
+		add( new FormComponent( "javax.swing.JComboBox" ) {
+			name: "sexCombo"
+			auxiliary() {
+				"JavaCodeGenerator.typeParameters": "Sex"
+				"JavaCodeGenerator.postInitCode": "${field}.addItem(Sex.MALE);\n${field}.addItem(Sex.FEMALE);"
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 320 )
+		} )
+		add( new FormComponent( "javax.swing.JComboBox" ) {
+			name: "socialGroupCombo"
+			auxiliary() {
+				"JavaCodeGenerator.typeParameters": "String"
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 350 )
+		} )
+		add( new FormComponent( "com.toedter.calendar.JDateChooser" ) {
+			name: "dateChooser"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 380 )
+		} )
+		add( new FormComponent( "javax.swing.JLabel" ) {
+			name: "dateLabel"
+			"text": "Date"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 410 )
+		} )
 	}
 }
