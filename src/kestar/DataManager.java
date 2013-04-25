@@ -25,7 +25,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class DataHelper {
+public class DataManager {
 	private JsonFactory factory;
 	private ObjectMapper mapper;
 	
@@ -38,7 +38,7 @@ public class DataHelper {
 	
 	private Map<File, List<String>> classFileMap;
 	
-	public DataHelper() {
+	public DataManager() {
 		factory = new JsonFactory();
 		mapper = new ObjectMapper();
 		

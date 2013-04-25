@@ -10,7 +10,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import kestar.DataHelper;
+import kestar.DataManager;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 
@@ -23,32 +23,30 @@ public class MainWindow extends JFrame {
 	private static final int CLIENTS_TAB = 0;
 	private static final int VEHICLES_TAB = 1;
 
-	private DataHelper dataHelper;
+	private DataManager dataManager;
 
-	public MainWindow() {
-		try {
-			UIManager.setLookAndFeel(
-					UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			System.err.println("Error setting system look and feel");
-		}
-
+	public MainWindow(DataManager dataManager) {
+		this.dataManager = dataManager;
+		
 		initComponents();
-	}
-
-	public void setDataHelper(DataHelper dataHelper) {
-		this.dataHelper = dataHelper;
-
-		clientsPanel.setDataHelper(this.dataHelper);
+		clientsPanel.setDataManager(dataManager);
 	}
 
 	private void dataTabbedPaneStateChanged(ChangeEvent e) {
+		switch (dataTabbedPane.getSelectedIndex()) {
+		case CLIENTS_TAB:
+			clientsPanel.updateData();
+			break;
+		case VEHICLES_TAB:
+			break;
+		}
+		
 		if (dataTabbedPane.getSelectedIndex() == CLIENTS_TAB) {
-			buyButton.setEnabled(true);
-			transferButton.setEnabled(true);
+			buyButton.setVisible(true);
+			transferButton.setVisible(true);
 		} else {
-			buyButton.setEnabled(false);
-			transferButton.setEnabled(false);
+			buyButton.setVisible(false);
+			transferButton.setVisible(false);
 		}
 	}
 
@@ -65,7 +63,7 @@ public class MainWindow extends JFrame {
 	private void removeButtonActionPerformed(ActionEvent e) {
 		switch (dataTabbedPane.getSelectedIndex()) {
 		case CLIENTS_TAB:
-			clientsPanel.removeSelection();
+			clientsPanel.removeSelectedElements();
 			break;
 		case VEHICLES_TAB:
 			break;
@@ -73,7 +71,7 @@ public class MainWindow extends JFrame {
 	}
 
 	private void buyButtonActionPerformed(ActionEvent e) {
-		BuyTicketDialog buyDialog = new BuyTicketDialog(this);
+		BuyTicketDialog buyDialog = new BuyTicketDialog(this, dataManager);
 		buyDialog.setVisible(true);
 	}
 

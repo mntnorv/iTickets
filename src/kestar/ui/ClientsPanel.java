@@ -9,19 +9,11 @@ import java.text.ParseException;
 import java.util.*;
 import javax.swing.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.text.MaskFormatter;
 
-import kestar.DataHelper;
+import kestar.DataManager;
 import kestar.data.Client;
 import kestar.data.Sex;
 import kestar.data.SocialGroup;
@@ -29,10 +21,10 @@ import kestar.data.SocialGroup;
 /**
  * @author Kestutis Taraskevicius
  */
-public class ClientsPanel extends JPanel implements DataManager {
+public class ClientsPanel extends JPanel implements UIDataManager {
 	private static final long serialVersionUID = 1L;
 
-	private DataHelper dataHelper;
+	private DataManager dataManager;
 	private JComboBox<String> socialGroupCombo;
 	private JComboBox<Sex> sexCombo;
 	private JTextField dateTextField;
@@ -41,73 +33,43 @@ public class ClientsPanel extends JPanel implements DataManager {
 
 	public ClientsPanel() {
 		initComponents();
-		
-		socialGroupCombo = new JComboBox<String>();
-		sexCombo = new JComboBox<Sex>();
-		sexCombo.addItem(Sex.MALE);
-		sexCombo.addItem(Sex.FEMALE);
-		
-		MaskFormatter dateFormatter = null;
-		try {
-			dateFormatter = new MaskFormatter("####-##-##");
-			dateTextField = new JFormattedTextField(dateFormatter);
-		} catch (ParseException e) {
-			/* do nothing */
-		}
-	}
-
-	public void setDataHelper(DataHelper newDataHelper) {
-		dataHelper = newDataHelper;
-		
-		clientsTableModel = new ClientsTableModel(dataHelper.getClients());
-		clientsTable.setModel(clientsTableModel);
-		
-		clientsTableModel.addTableModelListener(new TableModelListener() {
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				dataHelper.writeData();
-			}
-		});
-		
-		initColumnEditors();
-		updateColumnEditors();
 	}
 	
-	public void updateColumnEditors() {
-		socialGroupCombo.removeAllItems();
-		for (SocialGroup group: dataHelper.getSocialGroups()) {
-			socialGroupCombo.addItem(group.getName());
-		}
+	public void setDataManager(DataManager dataManager) {
+		this.dataManager = dataManager;
+		initTable();
+		updateData();
 	}
 	
 	@Override
 	public void addNewElement() {
-		int oldCount = dataHelper.getClients().size();
-		dataHelper.getClients().add(new Client());
+		int oldCount = dataManager.getClients().size();
+		dataManager.getClients().add(new Client());
 		clientsTableModel.fireTableRowsInserted(oldCount - 1, oldCount);
 	}
 
 	@Override
-	public void removeSelection() {
+	public void removeSelectedElements() {
 		int selection[] = clientsTable.getSelectedRows();
 		for (int i = selection.length - 1; i >= 0; i--) {
-			dataHelper.getClients().remove(selection[i]);
+			dataManager.getClients().remove(selection[i]);
 		}
 		clientsTableModel.fireTableDataChanged();
 	}
 	
-	private void initColumnEditors() {
-		clientsTable.getColumnModel()
-		.getColumn(ClientsTableModel.SEX_COLUMN)
-		.setCellEditor(new DefaultCellEditor(sexCombo));
-		
-		clientsTable.getColumnModel()
-		.getColumn(ClientsTableModel.BIRTHDAY_COLUMN)
-		.setCellEditor(new DefaultCellEditor(dateTextField));
-		
-		clientsTable.getColumnModel()
-		.getColumn(ClientsTableModel.SOCIAL_GROUP_COLUMN)
-		.setCellEditor(new DefaultCellEditor(socialGroupCombo));
+	@Override
+	public void updateData() {
+		if (dataManager != null) {
+			updateColumnEditors();
+			clientsTableModel.fireTableDataChanged();
+		}
+	}
+	
+	private void updateColumnEditors() {
+		socialGroupCombo.removeAllItems();
+		for (SocialGroup group: dataManager.getSocialGroups()) {
+			socialGroupCombo.addItem(group.getName());
+		}
 	}
 
 	private void clientsTableMouseReleased(MouseEvent e) {
@@ -118,6 +80,10 @@ public class ClientsPanel extends JPanel implements DataManager {
 	        	rightClickMenu.show(clientsTable, e.getPoint().x, e.getPoint().y);
 	        }
 		}
+	}
+	
+	private void clientsTableModelTableChanged(TableModelEvent e) {
+		dataManager.writeData();
 	}
 
 	private void initComponents() {
@@ -164,6 +130,47 @@ public class ClientsPanel extends JPanel implements DataManager {
 			rightClickMenu.add(removeButton);
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		
+		//======== socialGroupCombo ========
+		socialGroupCombo = new JComboBox<String>();
+		
+		//======== sexCombo ========
+		sexCombo = new JComboBox<Sex>();
+		sexCombo.addItem(Sex.MALE);
+		sexCombo.addItem(Sex.FEMALE);
+		
+		//======== dateFormatter ========
+		MaskFormatter dateFormatter = null;
+		try {
+			dateFormatter = new MaskFormatter("####-##-##");
+			dateTextField = new JFormattedTextField(dateFormatter);
+		} catch (ParseException e) {
+			/* do nothing */
+		}
+	}
+	
+	private void initTable() {
+		clientsTableModel = new ClientsTableModel(dataManager.getClients());
+		clientsTable.setModel(clientsTableModel);
+		
+		clientsTableModel.addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				clientsTableModelTableChanged(e);
+			}
+		});
+		
+		clientsTable.getColumnModel()
+		.getColumn(ClientsTableModel.SEX_COLUMN)
+		.setCellEditor(new DefaultCellEditor(sexCombo));
+		
+		clientsTable.getColumnModel()
+		.getColumn(ClientsTableModel.BIRTHDAY_COLUMN)
+		.setCellEditor(new DefaultCellEditor(dateTextField));
+		
+		clientsTable.getColumnModel()
+		.getColumn(ClientsTableModel.SOCIAL_GROUP_COLUMN)
+		.setCellEditor(new DefaultCellEditor(socialGroupCombo));
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
