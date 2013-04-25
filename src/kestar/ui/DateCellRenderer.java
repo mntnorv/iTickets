@@ -23,6 +23,15 @@ public class DateCellRenderer implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		textField.setText(dateFormat.format(((Calendar)value).getTime()));
+		if (!isSelected) {
+			textField.setForeground(table.getForeground());
+			textField.setBackground(table.getBackground());
+			textField.setOpaque(false);
+		} else {
+			textField.setForeground(table.getSelectionForeground());
+			textField.setBackground(table.getSelectionBackground());
+			textField.setOpaque(true);
+		}
 		return textField;
 	}
 
