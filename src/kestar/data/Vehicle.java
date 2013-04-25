@@ -1,21 +1,21 @@
 package kestar.data;
 
 public class Vehicle {
-	private int type;
+	private String type;
 	private int route;
 	private double price;
 	private String timeData;
 	private String discountGroup;
 	
 	public Vehicle() {
-		type = 0;
+		type = "";
 		route = 0;
 		price = 0;
 		timeData = "";
 		discountGroup = "";
 	}
 
-	public Vehicle(int type, int route, double price, String timeData,
+	public Vehicle(String type, int route, double price, String timeData,
 			String discountGroup) {
 		super();
 		this.type = type;
@@ -25,11 +25,11 @@ public class Vehicle {
 		this.discountGroup = discountGroup;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -63,5 +63,10 @@ public class Vehicle {
 
 	public void setDiscountGroup(String discountGroup) {
 		this.discountGroup = discountGroup;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%d", route);
 	}
 }

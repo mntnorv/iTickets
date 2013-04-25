@@ -23,6 +23,7 @@ new FormModel {
 					"JavaCodeGenerator.typeParameters": "String"
 					"JavaCodeGenerator.postInitCode": "for (String item: dataManager.getVehicleTypes()) {\n\tvehicleTypeComboBox.addItem(item);\n}"
 				}
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "vehicleTypeComboBoxItemStateChanged", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridWidth": 7
 				"gridX": 3

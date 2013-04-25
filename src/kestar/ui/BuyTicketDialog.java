@@ -7,6 +7,7 @@ package kestar.ui;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Frame;
+import java.awt.event.*;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -43,6 +44,22 @@ public class BuyTicketDialog extends JDialog {
 		this.dataManager = dataManager;
 		initComponents();
 	}
+	
+	private void updateVehicleComboBox() {
+		vehicleComboBox.removeAllItems();
+		
+		for (Vehicle vehicle: dataManager.getVehicles()) {
+			if (vehicle.getType().equals(vehicleTypeComboBox.getSelectedItem())) {
+				vehicleComboBox.addItem(vehicle);
+			}
+		}
+	}
+
+	private void vehicleTypeComboBoxItemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			updateVehicleComboBox();
+		}
+	}
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -76,6 +93,12 @@ public class BuyTicketDialog extends JDialog {
 			"2dlu, 6*($lgap, default), $lgap, default:grow, $lgap, default, $lgap, 2dlu"));
 
 		//---- vehicleTypeComboBox ----
+		vehicleTypeComboBox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				vehicleTypeComboBoxItemStateChanged(e);
+			}
+		});
 		for (String item: dataManager.getVehicleTypes()) {
 			vehicleTypeComboBox.addItem(item);
 		}
