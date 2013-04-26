@@ -71,12 +71,13 @@ public class MainWindow extends JFrame {
 	}
 
 	private void buyButtonActionPerformed(ActionEvent e) {
-		BuyTicketDialog buyDialog = new BuyTicketDialog(this, dataManager);
+		BuyTicketDialog buyDialog = new BuyTicketDialog(this, dataManager, dataManager.getClients().get(0));
 		buyDialog.setVisible(true);
 	}
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		// Generated using JFormDesigner Evaluation license - KÄstutis TaraskeviÄius
 		ResourceBundle bundle = ResourceBundle.getBundle("kestar.strings");
 		mainToolBar = new JToolBar();
 		addButton = new JButton();
@@ -166,6 +167,7 @@ public class MainWindow extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+	// Generated using JFormDesigner Evaluation license - KÄstutis TaraskeviÄius
 	private JToolBar mainToolBar;
 	private JButton addButton;
 	private JButton removeButton;
