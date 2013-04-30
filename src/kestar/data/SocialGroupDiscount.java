@@ -17,7 +17,8 @@ public class SocialGroupDiscount extends Discount {
 	@Override
 	public boolean isApplicable(Calendar dateAndTime, Client client,
 			Vehicle vehicle) {
-		return client.getSocialGroup().equals(group);
+		boolean rv = client.getSocialGroup().equals(group);
+		return rv;
 	}
 	
 	public String getGroup() {

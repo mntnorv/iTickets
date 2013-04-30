@@ -23,6 +23,8 @@ import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import kestar.DataManager;
 import kestar.data.Client;
@@ -43,6 +45,7 @@ public class BuyTicketDialog extends JDialog {
 	
 	private static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 	
+	private boolean initialized;
 	private DataManager dataManager;
 	private Client client;
 	
@@ -50,6 +53,7 @@ public class BuyTicketDialog extends JDialog {
 		super(owner);
 		this.dataManager = dataManager;
 		this.client = client;
+		initialized = false;
 		initComponents();
 	}
 
@@ -57,6 +61,7 @@ public class BuyTicketDialog extends JDialog {
 		super(owner);
 		this.dataManager = dataManager;
 		this.client = client;
+		initialized = false;
 		initComponents();
 	}
 	
@@ -71,7 +76,7 @@ public class BuyTicketDialog extends JDialog {
 	}
 	
 	private void updatePriceLabels() {
-		if (vehicleComboBox.getSelectedItem() != null) {
+		if (initialized) {
 			Calendar dateAndTime = dateChooser.getCalendar();
 			Calendar time = GregorianCalendar.getInstance();
 			try {
@@ -86,7 +91,6 @@ public class BuyTicketDialog extends JDialog {
 			Vehicle selectedVehicle = (Vehicle) vehicleComboBox.getSelectedItem();
 			double discount = getDiscount(selectedVehicle, dateAndTime, client);
 			
-			balanceLabel.setText(String.format("%.2f", client.getBalance()));
 			fullPriceLabel.setText(String.format("%.2f", selectedVehicle.getPrice()));
 			discountLabel.setText(String.format("%.2f", getDiscount(selectedVehicle, dateAndTime, client)));
 			finalPriceLabel.setText(String.format("%.2f", selectedVehicle.getPrice()*(1-discount/100)));
@@ -101,12 +105,32 @@ public class BuyTicketDialog extends JDialog {
 				fullDiscount += discount.getDiscount();
 			}
 		}
+		System.out.println(fullDiscount);
 		return fullDiscount;
+	}
+	
+	private boolean isTimeFormatCorrect(String timeStr) {
+		boolean isCorrect = true;
+		
+		try {
+			TIME_FORMAT.parse(timeTextField.getText());
+		} catch (ParseException e) {
+			isCorrect = false;
+		}
+		
+		return isCorrect;
+	}
+	
+	private void timeTextFieldValueChanged() {
+		if (isTimeFormatCorrect(timeTextField.getText())) {
+			updatePriceLabels();
+		}
 	}
 
 	private void vehicleTypeComboBoxItemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			updateVehicleComboBox();
+			updatePriceLabels();
 		}
 	}
 
@@ -155,6 +179,8 @@ public class BuyTicketDialog extends JDialog {
 		contentPane.add(vehicleTypeComboBox, CC.xywh(3, 3, 5, 1));
 		contentPane.add(vehicleComboBox, CC.xywh(3, 5, 5, 1));
 		contentPane.add(dateChooser, CC.xy(3, 7));
+
+		//---- timeTextField ----
 		contentPane.add(timeTextField, CC.xywh(5, 7, 3, 1));
 
 		//---- balanceNameLabel ----
@@ -205,6 +231,29 @@ public class BuyTicketDialog extends JDialog {
 		Calendar now = GregorianCalendar.getInstance();
 		dateChooser.setCalendar(now);
 		timeTextField.setText((new Time(now)).toString());
+		
+		balanceLabel.setText(String.format("%.2f", client.getBalance()));
+		
+		//---- listeners ----
+		timeTextField.getDocument().addDocumentListener(new DocumentListener() {		
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				timeTextFieldValueChanged();
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				timeTextFieldValueChanged();
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				timeTextFieldValueChanged();
+			}
+		});
+		
+		//---- initialized ----
+		initialized = true;
 		
 		updatePriceLabels();
 	}
